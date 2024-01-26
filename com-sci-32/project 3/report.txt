@@ -1,0 +1,47 @@
+1. Board:
+I used two vectors to represent the each side's set of holes and the pot. The pot was index 0 and the holes were indexes 1 to m_holes. I made them private so they could not be directly edited by my other files. I also stored the size of the vector in an int to make it easy to access while I was writing my Board code.
+Player:
+In the abstract base class, I had 3 functions (excluding the constructor and the destrctor). The ABC was abstract because chooseMove was not implemented. name() returned the name of the player, which I had stored in a private member variable to make it easy to access while I was writing my Player code. I had isInteractive return false because 2 of the 3 types of players were not interactive, and I just overrided this function in the HumanPlayer subclass. BadPlayer and HumanPlayer did not have any additional helper functions or member variables. SmartPlayer did not have any additional member variables, but it did have 3 private helper functions. The 3 private helper functions made it easier to read the code that would make up the chooseMove function for SmartPlayer. It could have been written without the helper functions, but it would have been more complicated and hard to read.
+Game:
+Each Game object has a board, two players, and a player making the current turn. The player variables were all stored as pointers.
+
+2. I used three private member functions within the chooseMove function. The first was evaluate, which contained the evaluation (heuristics) for how good the move was. I used the "The greater the difference between the number of beans in my pot and the number in my opponent's, the better" approach. If the evaluation returned a very positive number, the move was good for SOUTH and bad for NORTH, and if the evaluation returned a very positive number, the move was bad for SOUTH and good for NORTH. This is because I would essentially subtract the number of beans in NORTH's pot from the number of beans in SOUTH's pot. I also had conditions to check whether the game was over and whether there was a winner or not. The second member function I used was complete move, which let you know if the player completed their turn. If the player's last bean ended up in their own pot, they would get another turn, so this function would return false. In almost every other case, it would return true. Lastly, I implemented a minimax algorithm as a private member function. It used recursive calls to see what the potential outcomes of different moves were. It used a copy of board to do this so it wouldn't change the actual game board. The algorithm took a timeLimit and a timer as parameters, so it would only continue recursively calling itself while the timer didn't reach the timeLimit. Because I used the helper functions, the chooseMove function just had to declare the parameters to pass into minimax and return the bestMove parameter of minimax.
+
+3. Board::sow
+	If the hole if invalid
+		return false
+	Else
+		Reset the number of beans in the hole
+		While we still have beans to sow
+			Sow counterclockwise (check edge cases!)
+			Decrement the number of beans we have to sow
+	Return
+   Game::move
+	Display the initial board so the players can see what moves they can make
+	If there are no beans in play
+		Sweep the board
+		Display the final board
+	Else
+		Make the player choose a hole for their move
+		Sow the beans in that hole
+		Display the board to reflect the change
+		
+		If the last bean ends up in the player's pot
+			Recursively call move
+		If the last bean ends up in a hole that was empty on the player's side
+			Capture
+    SmartPlayer::chooseMove
+	Call the minimax algorithm
+		If the game is over or the time is up for recursion
+			Return the evaluation of the current position
+		Else
+			Find a hole that will count as a valid move using a loop
+				Create a copy of the board to simulate the move
+				If you can complete the move (i.e. You won't need another turn), recursively call the minimax algorithm for your opponent's turn
+				If you can't complete the move, call the minimax algorithm for your additional turn
+		
+				If the recursive move is better, update value and bestMove
+
+4. I struggled with the implementation of SmartPlayer's chooseMove because I couldn't even figure out where to begin. However, once I decided to start by ignoring the time constraint and realized that I should be writing helper functions because it was such a complex task, it became doable. After my SmartPlayer implementation seemed right, I added the timer.
+
+5. I used the test cases for Board, Player, and Game that were given to us in the spec. I also watched two SmartPlayers play against each other multiple times and tried to see if they were making decent moves. I also played against a SmartPlayer so I could try to see if I could beat it (which might have indicated errors in my SmartPlayer's chooseMove function).

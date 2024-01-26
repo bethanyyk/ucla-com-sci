@@ -1,0 +1,37 @@
+Algorithms and Data Structures:
+
+I implemented the dictionary as an array of vectors that contain strings. I initialized the array to contain 50000 spaces and I had a separate member variable that stored the maximum number of buckets the user actually wanted us to use. If the number of buckets the user passes in is less than the default maximum of 50000, then we only use the spaces in the array that correspond to the number inputted by the user.
+
+For the insert function, I started by removing characters that are not letters and making all of the letters lowercase using the helper function provided by Smallberg. Then I copied the word being inserted into a temp string and sorted that temp string. This would allow me to hash the sorted letters while still having access to what the original word was. I reduced the hash value to the number of buckets and inserted the original word into the vector of the corresponding spot in the array. By doing it like this, all of the anagrams of a certain word would be stored in the same spot in an array (i.e. in the same vector), which would make it easier to look up anagrams.
+
+For the lookup function, I again started by removing the characters that are not letters and making all of the letters lowercase. I then sorted the letters in the string passed in by the user and hashed the sorted letters. I reduced the hash value to the number of buckets so I knew which vector I would have to check. Because there is a possibility that multiple anagrams could be stored in the same bucket (especially when there is a small number of buckets), I also put in a check to see whether the word at a certain position in the vector was actually an anagram of the word that was passed in. I used nested if statements to check if the length of the words were the same, if the sums of the ASCII values of each character were the same, and whether the same letters were used. I used nested ifs with the simplest check on the outside and the most complex check on the inside so I could save time by skipping the more complex checks if the simpler checks failed. If all of the checks were passed, then I would call the function on the word.
+
+
+
+Pseudocode:
+
+void DictionaryImpl::insert(string word)
+{
+     Remove non-letters and make letters lowercase
+     Sort the letters in the word
+     Hash the sorted word and reduce to the number of buckets
+     Push the word into the vector at the spot in the array that corresponds to the hash value
+}
+
+void DictionaryImpl::lookup(string letters, void callback(string))
+{
+     Remove non-letters and make letters lowercase
+     Hash the sorted word and reduce to the number of buckets
+     
+     For each word in the vector at the spot in the array that corresponds to the hash value
+          Check if the word in the vector has the same number of letters as the word that was passed in
+          Check if the sum of the ASCII values of the word in the vector has the same sum as the word that was passed in
+          Check if the sorted letters of the word in the vector is the same as the word that was passed in
+     If all of the checks were passed, call the function on the word in the vector
+}
+
+
+
+Notable Problems:
+
+Before I decided to implement the algorithms the way I did in the end, I tried to hash each word before sorting it and use the generateNextPermutation function provided by Smallberg for looking up anagrams. Not only did this take a really long time, there were also a lot of bugs in the program that I couldn't find. However, after deciding to store anagrams of the same word in the same bucket, I ran into no problems with my implementations.

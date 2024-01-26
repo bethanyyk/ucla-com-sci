@@ -1,0 +1,12 @@
+Name: Bethany Kim
+UID: 
+
+In step 5, I tried 25 and 10 for the Democrats and Republicans respectively, and got the expected result that Democrats would control the Senate.
+Then, I tried 36 and 0 for the Democrats and Republicans respectively, and got the expected result that Democrats would control the Senate, but I also got a message saying that something looked awry with my numbers.
+
+In the logic_error.cpp file, I changed the >= in line 31 to <=. By doing this, the program would return the opposite from what you would expect.
+If you inputted 25 and 10 for the Democrats and Republicans respectively, it would say that the Republicans would control the Senate instead of the Democrats.
+The compiler said there were no issues found, and all of my test cases gave the results they were supposed to.
+
+In the compile_error.cpp file, I added extra white space in between the << in line 20.
+This resulted in the compiler saying there were 2 errors (E0029: expected an expression. C2059: syntax error: '<'). The program would not run at all.
