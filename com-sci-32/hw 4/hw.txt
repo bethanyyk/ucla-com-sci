@@ -1,0 +1,13 @@
+1e. During test case 3, additional elements are added to v2 while iterating over it, which causes the loop to continue beyond the original size of the vector. The code will then try to access elements outside the valid range, which is why the test case fails.
+
+3. It causes a compilation error because it doesn't have comparison operators - The one-parameter overload of insert inserts the object in a position such that its value is less than or equal to the value of the object that comes after it. In other words, it is using the < operator to check each item in the position to see if it is the correct place to insert the new item.
+
+4b. The path parameter in the two-parameter overload allowed us to concatenate the current menu item's name to the existing items in the path during each recursive call and pass the concatenated string to the next recursive call. Without the path parameter, there would be no way to keep track of the current location within the menu hierarchy.
+
+5a. O(N^3) - The outermost loop iterates N times, the second loop iterates N times for each iteration of the outermost loop, and the innermost loop iterates N times for each iteration of the second loop. Therefore, the total number of iterations of the innermost loop is N*N*N. We don't need to look at the other basic operations that are performed because they do not depend on the size of the input, which makes them constant time.
+
+5b. O(N^3) - The outer loop iterates N times and the inner loop iterates from 0 to i for each iteration of the outer loop, and the innermost loop iterates N times for each iteraction of the second loop. The total number of iterations of the second loop is 0 + 1 + 2 + ... + (N-1), which is O(N^2). The total number of iterations of the innermost loop is N* O(N^2), which is O(N^3).
+
+6a. O(N) - The function visits each node in seq1 once. It then visits each node in seq2 once. However, each call to get( , ) and .insert( , ) within the body of the loop is O(N/2).Therefore, this function is O(2N^2).
+
+6b. O(N) - The function visits each node in seq1 once. It then visits each node in seq2 once. Everything done in the body of the for loops is constant time. Therefore, this function visits N + N items, which is  O(2N). It has a better time complexity than the implementation in part a.
