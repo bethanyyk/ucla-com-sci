@@ -1,0 +1,53 @@
+Name: Bethany Kim
+
+Notable Obstacles:
+- Before creating another array that contained true for R values and false for M and _ values, values that were wrong were always marked maybe in the third for loop.
+- Inside the nested for loop that compared a move to an answer, I had trouble figuring out which position in the array should be updated.
+
+Test Functions (in addition to CodeBoard):
+    Piece p;
+    assert( p.getColor() == NOTVALID );
+    p = Piece( "R" );
+    assert( p.getColor() == RED );
+    assert( p.getColorAsString() == "R" );
+
+    Move m;
+    p = m.getPiece( 0 );
+    assert( p.getColor() == NOTVALID );
+    m.setPieces( "RBRB" );
+    p = m.getPiece( 2 );
+    assert( p.getColor() == RED );
+    m.setPiece( 2, 'y' );
+    p = m.getPiece( 2 );
+    assert( p.getColor() == YELLOW );
+
+    Score s;
+    assert( s.isExactMatch()  == false );
+    assert( s.getAnswer( 2 ) == WRONG );
+    m.setPieces( "RBRB" );
+    Move theAnswer;
+    theAnswer.setPieces( "YOYO" );
+    s = Score( m, theAnswer );
+    assert( s.isExactMatch() == false );
+    assert( s.to_string() == "____" );
+    theAnswer.setPieces( "rbrb" );
+    s = Score( m, theAnswer );
+    assert( s.isExactMatch() == true );
+    assert( s.to_string() == "RRRR" );
+
+    Board b;
+    assert( b.getCurrentRound() == 0 );
+    m.setPieces( "POPO" );
+    theAnswer.setPieces( "YYOP" );
+    s = Score( m, theAnswer );
+    b.endRound( m, s );
+    assert( b.getCurrentRound() == 1 );
+    assert( b.getMoveForRound( 0 ).to_string() == "POPO" );
+    assert( b.getScoreForRound( 0 ).to_string() == "MM__" );
+
+    Mastermind game( "rbyo" );
+    assert( game.answer() == "RBYO" );
+    assert( game.gameIsOver() == false );
+    m = game.play( "BBBB" );
+    s = game.endRound( m );
+    assert( s.to_string() == "_R__" );
