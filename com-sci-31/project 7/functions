@@ -1,0 +1,127 @@
+void  Move::setPieces( std::string s )
+{
+    if (s.size() == REQUIREDLENGTH)
+    {
+        for (int i = 0; i < REQUIREDLENGTH; i++)
+        {
+            array[i] = s.at(i);
+        }
+    }
+    else
+    {
+        throw std::logic_error("supplied string is too short or long");
+    }
+}
+
+Score::Score( Move move, Move answer )
+{
+    bool matchChecked[REQUIREDLENGTH];
+    for (int i = 0; i < REQUIREDLENGTH; i++)
+    {
+        array[i] = WRONG;
+        matchChecked[i] = false;
+    }
+    for (int i = 0; i < REQUIREDLENGTH; i++)
+    {
+        if (move.getPiece(i).getColor() == answer.getPiece(i).getColor())
+        {
+            array[i] = RIGHT;
+            matchChecked[i] = true;
+        }
+    }
+    for (int i = 0; i < REQUIREDLENGTH; i++) // loop through move pieces
+    {
+        for (int j = 0; j < REQUIREDLENGTH; j++) // loop through answer pieces
+        {
+            if (array[i] == WRONG && matchChecked[j] == false)
+            {
+                if (move.getPiece(i).getColor() == answer.getPiece(j).getColor())
+                {
+                    array[i] = MAYBE;
+                    matchChecked[j] = true;
+                }
+            }
+        }
+    }
+}
+
+bool Score::isExactMatch() const
+{
+    for (int i = 0; i < REQUIREDLENGTH; i++)
+    {
+        if (array[i] != RIGHT)
+        {
+            return (false);
+        }
+    }
+    return(true);
+}
+
+int Board::getCurrentRound() const
+    {
+        return(mRoundCount);
+    }
+
+Move Board::getMoveForRound( int round ) const
+    {
+        if (round < 0 || round > TOTALROUNDSALLOWED)
+        {
+            throw std::logic_error("invalid round");
+        }
+        else
+        {
+            return (moves[round]);
+        }
+    }
+
+Score Board::getScoreForRound( int round ) const
+    {
+        if (round < 0 || round > TOTALROUNDSALLOWED)
+        {
+            throw std::logic_error("invalid round");
+        }
+        else
+        {
+            return (scores[round]);
+        }
+    }
+
+Score Board::getScoreForRound( int round ) const
+    {
+        if (round < 0 || round > TOTALROUNDSALLOWED)
+        {
+            throw std::logic_error("invalid round");
+        }
+        else
+        {
+            return (scores[round]);
+        }
+    }
+
+Mastermind::endRound( Move m )
+{
+    // for now...
+    Score s = Score(m, mWinningMove);
+    mBoard.endRound(m, s);
+    mRound++;
+    return( s );
+}
+
+GAMEOUTCOME  Mastermind::determineGameOutcome( ) const
+{
+    // for now...
+    GAMEOUTCOME outcome = GAMENOTOVER;
+    if (mCurrentScore.isExactMatch())
+    {
+        outcome = GAMEWON;
+    }
+    else if (mRound == TOTALROUNDSALLOWED)
+    {
+        outcome = GAMELOST;
+    }
+    else
+    {
+        outcome = GAMENOTOVER;
+    }
+    return(outcome);
+}
