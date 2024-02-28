@@ -1,0 +1,27 @@
+Name: Bethany Kim
+
+Notable Obstacles:
+- Realizing that the inner loops for hasNoDuplicates and countXPairs have to go up to n, not n - 1
+- Figuring out in what order temp store variables needed to be changed
+- Thinking through the logic of the flipAround function
+
+Test Cases (in addition to CodeBoard):
+    string a[6] = { "123", "456", "789", "gamma", "beta", "delta" };
+    assert(locateMaximum(a, 6) == 3);
+    assert(hasNoDuplicates(a, 6) == true);
+    assert(countPunctuation(a, 6) == 0);
+    assert(flipAround(a, 6) == 3);
+    for (int i = 0; i < 6; i++)
+    {
+	    cout << a[i] << " ";
+    }
+    cout << endl;
+    string b[6] = { "7", "3", "10", "8", "5", "6" };
+    assert(countXPairs(b, 6, 13) == 3);
+    assert(moveToEnd(b, 6, 3) == 3);
+    // expect 7 3 10 5 6 8
+    for (int i = 0; i < 6; i++)
+    {
+	    cout << b[i] << " ";
+    }
+    cout << endl;
