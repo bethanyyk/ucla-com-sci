@@ -1,0 +1,56 @@
+Name: Bethany Kim
+
+Notable Obstacles:
+- It took some time to differentiate between the plan enum and the MealPlan class because of how similar their names are. It was especially confusing when we had to use the plan enum to initialize a MealPlan object.
+- I had trouble figuring out which .h files I should include in which files at first.
+- I was confused about what to set the BruinCard member variables to in the constructor because it took no arguments.
+- I though we only needed to transfer .cpp files to the SEASnet server, so I had trouble getting g31 to work without .h files before figuring it out.
+
+Test Cases (in addition to CodeBoard):
+    BruinCard noMealPlan;
+    assert(noMealPlan.hasPurchasedMealPlan() == false);
+    assert(noMealPlan.mealsLeftThisWeek() == 0);
+    assert(noMealPlan.eat(BREAKFAST) == false);
+    
+    BruinCard c;
+    MealPlan m;
+    m.pickPlan(PREMIER11);
+    c.purchaseMealPlan(m);
+    c.startQuarter();
+    assert(c.mealsLeftThisWeek() == 11 * 11);
+    c.newWeek();
+    assert(c.eat(BREAKFAST));
+    assert(c.eat(BREAKFAST));
+    assert(c.mealsLeftThisWeek() == 11 * 11 - 2);
+    c.newDay();
+    assert(c.mealsLeftThisWeek() == 11 * 11 - 2);
+    c.newWeek();
+    assert(c.mealsLeftThisWeek() == 11 * 11 - 2);
+    assert(std::to_string(m.cost()) == "5018.280000");
+    
+    BruinCard d;
+    MealPlan n;
+    n.pickPlan(REGULAR11);
+    d.purchaseMealPlan(n);
+    d.startQuarter();
+    d.newWeek();
+    assert(d.mealsLeftThisWeek() == 11);
+    assert(d.eat(BREAKFAST));
+    assert(d.eat(BREAKFAST) == false);
+    assert(d.mealsLeftThisWeek() == 10);
+    d.newDay();
+    assert(d.eat(BREAKFAST));
+    assert(d.mealsLeftThisWeek() == 9);
+    d.newWeek();
+    assert(d.mealsLeftThisWeek() == 11);
+    assert(std::to_string(n.cost()) == "4646.640000");
+    
+    BruinCard e;
+    e.startQuarter();
+    e.newWeek();
+    assert(e.eat(BREAKFAST) == false);
+    assert(e.mealsLeftThisWeek() == 0);
+    e.newDay();
+    assert(e.eat(LUNCH) == false);
+    assert(e.eat(DINNER) == false);
+    assert(e.eat(WEEKENDBRUNCH) == false);
