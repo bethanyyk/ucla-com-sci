@@ -1,0 +1,123 @@
+---
+title: "STATS 10 Assignment 2"
+author: "Bethany Kim"
+date: "2023-05-07"
+output: html_document
+---
+Part I\
+Exercise 1\
+```{r}
+# a)
+flint <- read.csv("flint.csv")
+
+# b)
+is_dangerous <- (flint$Pb >= 15)
+mean(is_dangerous)
+
+# c)
+mean(flint$Cu[flint$Region == "North"])
+
+# d)
+mean(flint$Cu[is_dangerous])
+
+# e)
+mean(flint$Pb)
+mean(flint$Cu)
+
+# f)
+boxplot(flint$Pb, main = "Lead Levels (ppb) in Flint, Michigan")
+
+# g)
+# Because the data is right-skewed with lots of outliers, it is better to use the median as the measure of center.
+median(flint$Pb)
+```
+
+Exercise 2\
+```{r}
+life <-read.table("https://ucla.box.com/shared/static/rqk4lc030pabv30wknx2ft9jy848ub9n.txt", header = TRUE)
+
+# a)
+plot(life$Life~life$Income)
+# The relationship between life expectancy and income is positive and nonlinear.
+
+# b)
+boxplot(life$Income)
+hist(life$Income)
+# The boxplot, which uses the 1.5 IQR criterion to identify outliers, does have some upper outliers. These upper outliers are also visible in the histogram as the data is skewed to the right.
+
+# c)
+lower_income <- life[life$Income < 1000, ]
+higher_income <- life[life$Income >= 1000, ]
+
+# d)
+plot(lower_income$Income, lower_income$Life)
+cor(lower_income$Income, lower_income$Life)
+```
+
+Exercise 3\
+```{r}
+maas <- read.table("https://ucla.box.com/shared/static/tv3cxooyp6y8fh6gb0qj2cxihj8klg1h.txt", header = TRUE)
+
+# a)
+summary(maas$lead)
+summary(maas$zinc)
+
+# b)
+hist(maas$lead)
+hist(log(maas$lead))
+
+# c)
+plot(log(maas$lead)~log(maas$zinc))
+# There is a strong, positive linear relationship between log(lead) and log(zinc).
+
+# d)
+mycolors <- c("green", "orange", "red")
+mylevels <- cut(maas$lead, c(30, 150, 400, 660))
+plot(maas$x, maas$y, xlab="x", ylab="y", "n")
+points(maas$x, maas$y, cex=maas$lead/mean(maas$lead), col=mycolors[as.numeric(mylevels)], pch=19)
+```
+
+Exercise 4\
+```{r}
+LA <- read.table("https://ucla.box.com/shared/static/d189x2gn5xfmcic0dmnhj2cw94jwvqpa.txt", header=TRUE)
+
+# a)
+# install.packages("maps")
+plot(LA$Longitude, LA$Latitude, xlab = "Longitude", ylab = "Latitude", main = "LA Neighborhoods")
+library(maps)
+map("county", "ca", add = TRUE)
+
+# b)
+schools_data = LA[LA$Schools > 0, ]
+plot(schools_data$Schools~schools_data$Income)
+# There is a positive, moderate linear relationship between income and school performance.
+```
+
+Exercise 5\
+```{r}
+customer_data <- read.csv("https://ucla.box.com/shared/static/y2y8rcie7mjw2h5t92x9dfcp133tc90h.csv")
+
+# a)
+colSums(is.na(customer_data))
+# There are 22 missing values in the dataset.
+# There are no missing values for customer ID, gender, education, and marital status.
+# There are 10 missing values for age, 5 missing values for income, and 7 missing values for purchase amount.
+
+# b)
+class(customer_data$cust_id)
+class(customer_data$age)
+class(customer_data$gender)
+class(customer_data$income)
+class(customer_data$education)
+class(customer_data$marital_status)
+class(customer_data$purchase_amt)
+# Customer IDs are characters, ages are integers, genders are characters, incomes are integers, educations are characters, marital statuses are characters, and purchase amounts are integers.
+# It might be better to convert income and purchase amount to numericals instead of integers because there might be decimals.
+
+# c)
+boxplot.stats(customer_data$age)$out
+boxplot.stats(customer_data$income)$out
+boxplot.stats(customer_data$purchase_amt)$out
+# There are no outliers for any of the numerical variables. If there had been outliers, I would have removed them from the data analysis.
+```
+

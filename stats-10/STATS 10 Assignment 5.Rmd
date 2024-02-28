@@ -1,0 +1,125 @@
+---
+title: "STATS 10 Assignment 5"
+author: "Bethany Kim"
+date: "2023-06-17"
+output: html_document
+---
+Part I\
+Exercise 1\
+```{r}
+pawnee <- read.csv("pawnee.csv", header = TRUE)
+
+# a)
+head(pawnee)
+dim(pawnee)
+
+# b)
+set.seed(1337)
+sample_index <- sample(541, size = 30)
+pawnee_sample <- pawnee[sample_index, ]
+head(pawnee_sample)
+
+# c)
+mean(pawnee_sample$Arsenic)
+mean(pawnee_sample$New_hlth_issue == "Y")
+
+# d)
+# For sample means, we use xbar.
+# For sample proportions, we use phat.
+
+# e)
+z_90 <- qnorm(0.95)
+z_95 <- qnorm(0.975)
+z_99 <- qnorm(0.995)
+
+p_hat <- 0.2
+n <- 30
+standard_error <- sqrt(p_hat * (1 - p_hat) / n)
+
+c(p_hat - z_90 * standard_error, p_hat + z_90 * standard_error)
+c(p_hat - z_95 * standard_error, p_hat + z_95 * standard_error)
+c(p_hat - z_99 * standard_error, p_hat + z_99 * standard_error)
+
+# f)
+# The smallest 100% confidence interval for a population proportion is (0, 1).
+
+# g)
+mean(pawnee$New_hlth_issue == "Y")
+
+# h)
+hist(pawnee$Arsenic)
+```
+
+Exercise 2\
+```{r}
+flint <- read.csv("flint.csv")
+
+# a)
+# H0: p = 0.1
+# Ha: p > 0.1
+# This is a one-sided (right-sided) test.
+
+# b)
+is_dangerous <- flint$Pb >= 15
+phat <- mean(is_dangerous)
+phat
+sd <- sd(is_dangerous)
+sd
+
+# c)
+p0 <- 0.1
+n <- 541
+se <- sqrt(p0 * (1 - p0) / n)
+se
+z <- (phat - p0)/se
+z
+
+# d)
+pnorm(z, lower.tail = FALSE)
+
+# e)
+# Because the p-value is greater than the significance level, we fail to reject the null hypothesis. We cannot conclude that the proportion of dangerous lead levels in Flint is greater than 10%.
+
+# f)
+# Because we failed to reject the null hypothesis, it is very likely that the true proportion is not greater than 10%, so we should tell the EPA that they probably don't need to take remediation action.
+
+# g)
+# install.packages("mosaic")
+library(mosaic)
+prop.test(x = sum(is_dangerous), n = 541, p = 0.1, alt = "greater")
+# The results did not change.
+```
+
+Exercise 3\
+```{r}
+# a)
+# H0: pN = pS
+# Ha: pN =/= pS
+# This is a two-sided test.
+
+# b)
+is_North <- flint$Region == "North"
+nN <- sum(is_North)
+sample_North <- flint[is_North, ]
+phatN <- mean(sample_North$Pb >= 15)
+
+is_South <- flint$Region == "South"
+nS <- sum(is_South)
+sample_South <- flint[is_South, ]
+phatS <- mean(sample_South$Pb >= 15)
+
+phat_pool <- ((nN * phatN) + (nS * phatS))/(nN + nS)
+z <- (phatN - phatS)/sqrt(phat_pool * (1 - phat_pool) * ((1 / nN) + (1/nS)))
+z
+
+# c)
+2 * (1 - pnorm(abs(z)))
+
+# d)
+# You do not reject the null hypothesis because the p-value greater than the significance level. You would see a test statistic at least as extreme as the one we found 31% of the time if the null hypothesis was true.
+# Because we failed to reject the null hypothesis, it's very likely that there isn't much of a difference in the proportion of dangerous lead levels in the North and in the South.
+
+# e)
+prop.test(x = c(sum(sample_North$Pb >= 15), sum(sample_South$Pb >= 15)), n = c(nN, nS), alt = "two.sided")
+# The results did not change.
+```

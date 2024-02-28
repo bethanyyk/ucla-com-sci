@@ -1,0 +1,88 @@
+---
+title: "STATS 10 Assignment 4"
+author: "Bethany Kim"
+date: "2023-06-04"
+output: html_document
+---
+Part I\
+Exercise 1\
+```{r}
+# a)
+# The area between the two values is 0.6827.
+# The empirical rule says that about 68% of the data lies within one standard deviation of the mean.
+
+# b)
+# The area that falls within two standard deviations of the mean is 0.9545. The empirical rule says that about 95% of the data lies within two standard deviations of the mean.
+# The are that falls within three standard deviations of the mean is 0.9973. The empirical rule says that about 99.7% of the data lies within three standard deviations of the mean.
+
+# c)
+# The first quartile lies 0.314 standard deviations above and below the mean.
+# The second quartile (the median) lies 0.671 standard deviations above and below the mean.
+# The third quartile lies 1.157 standard deviations above and below the mean.
+```
+
+Exercise 2\
+```{r}
+# a)
+pnorm(65, mean = 69, sd = 2.8)
+
+# b)
+pnorm(75, mean = 69, sd = 2.8, lower.tail = FALSE)
+
+# c)
+pnorm(72, mean = 69, sd = 2.8) - pnorm (66, mean = 69, sd = 2.8)
+```
+
+Exercise 3\
+```{r}
+# a)
+qnorm(0.005, mean = 69, sd = 2.8)
+
+# b)
+qnorm(0.0025, mean = 69, sd = 2.8, lower.tail = FALSE)
+```
+
+Exercise 4\
+```{r}
+pawnee <- read.csv("pawnee.csv")
+
+# We first create objects for common quantities we will use for this exercise.
+n <- 30 # The sample size
+N <- 541 # The population size
+M <- 1000 # Number of samples/repetitions
+# Create vectors to store the simulated proportions from each repetition.
+phats <- numeric(M) # for sample proportions
+# Set the seed for reproduceability
+set.seed(123)
+# Always set the seed OUTSIDE the for loop.
+# Now we start the loop. Let i cycle over the numbers 1 to 1000 (i.e. iterate 1000 times).
+for(i in seq_len(M)){
+  # The i-th iteration of the for loop represents a single repetition.
+  # Take a simple random sample of size n from the population of size N.
+  index <- sample(N, size = n)
+  # Save the random sample in the sample_i vector.
+  sample_i <- pawnee[index, ]
+  # Compute the proportion of the i-th sample of households with a new health issue.
+  phats[i] <- mean(sample_i$New_hlth_issue == "Y")
+}
+
+# a)
+hist(phats, prob = TRUE)
+curve(dnorm(x, mean(phats), sd (phats)), add = TRUE)
+
+# b)
+mean(phats)
+sd(phats)
+
+# c)
+# Based on the histogram from part a, the simulated distribution of sample proportions is approximately normal. The histogram is unimodal, roughly symmetric, and roughly bell-shaped.
+
+# d)
+p <- mean(pawnee$New_hlth_issue == "Y")
+p #mean
+sqrt(p*(1-p)/n) #sd
+
+0.2928 - 0.2920518
+0.07951963 - 0.08301757
+# The predictions are very close to my answers from part b.
+```

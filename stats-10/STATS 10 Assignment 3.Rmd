@@ -1,0 +1,102 @@
+---
+title: "STATS 10 Assignment 3"
+author: "Bethany Kim"
+date: "2023-05-21"
+output: html_document
+---
+Part I\
+Exercise 1\
+```{r}
+soil <- read.table("soil_complete.txt", header=T)
+
+# a)
+soil_linear_model <- lm(soil$lead ~ soil$zinc)
+summary(soil_linear_model)
+
+# b)
+plot(soil$lead ~ soil$zinc)
+abline(soil_linear_model, col = "red", lwd = 2)
+
+# c)
+plot(soil_linear_model$residuals ~ soil$zinc, main = "Residuals plot")
+abline(a = 0, b = 0, col = "red", lwd = 2)
+
+# d)
+# lead = 16.582928 + 0.291335(zinc)
+
+# e)
+16.582928 + 0.291335 * 1000
+
+# f)
+# y_A = a + b(x_A)
+# y_B = a + b(x_B)
+# => y_A - y_B = b(x_A - x_B)
+# => y_A - y_B = 0.291335(100)
+# We would expect the lead concentration in location A to be 29.1335 ppm higher than location B.
+
+# g)
+# R^2 = 0.912
+# 91.2% of the variation in lead concentration is explained by zinc concentration.
+
+# h)
+# Using the residual plot
+# Linearity - There is no clear pattern in residuals (The points are randomly scattered), so this assumption is satisfied.
+# Symmetry - There is a similar number of points above and below the regression line, so this assumption is satisfied.
+# Variance - The points should be randomly scattered around 0 for the entire domain of the data, but the points there is less variance (Points are concentrated around 0) when zinc concentrations are less than 500 ppm and there is more variance when zinc concentrations are greater than 500. Therefore, this assumption is NOT satisfied.
+```
+
+Exercise 2\
+```{r}
+ice <- read.csv("sea_ice.csv", header = TRUE)
+ice$Date <- as.Date(ice$Date, "%m/%d/%Y")
+
+# a)
+ice_linear_model <- lm(ice$Extent ~ ice$Date)
+summary(ice_linear_model)
+
+# b)
+plot(ice$Extent ~ ice$Date)
+abline(ice_linear_model, col = "red", lwd = 2)
+# There is a weak positive linear relationship between the sea ice extent and time.
+
+# c)
+plot(ice_linear_model$residuals ~ ice$Date, main= "Residuals plot")
+abline(a = 0, b = 0, col = "red", lwd = 2)
+# Using the residual plot
+# Linearity - There is no clear pattern in residuals (The points are randomly scattered), so this assumption is satisfied.
+# Symmetry - There is a similar number of points above and below the regression line, so this assumption is satisfied.
+# Variance - The points are randomly scattered around 0 for the entire domain of the data, so this assumption is satisfied.
+# It is appropriate to use a linear model.
+```
+
+Exercise 3\
+```{r}
+# a)
+# The sample space has 36 outcomes.
+# There are 6 outcomes that sum to 6 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1) and 2 outcomes that sum to 11 (5+6, 6+5). The chance that Adam will double his money in the first round of the game is (6+2)/36 = 0.22.
+# There is 1 outcome that sums to 2 (1+1), 2 outcomes that sum to 3 (1+2, 2+1), and 1 outcome that sums to 12 (6+6). The chance that Adam will lose all the money he bets is (1+2+1)/36 = 0.11.
+
+# b)
+set.seed(123)
+sample_rolls <- replicate(5000, replicate(2, sample(1:6,1)))
+sample_sums <- colSums(sample_rolls)
+barplot(table(sample_sums))
+
+# c)
+mean(sample_sums == 7 | sample_sums == 11)
+# Adam doubled his money 21.88% of the time.
+mean(sample_sums == 2 | sample_sums == 3 | sample_sums == 12)
+# Adam lost his money 11.72% of the time.
+
+# d)
+# If two events are independent, the probability of one event happening doesn't influence/impact the probability of the other event happening. Adam winning money and Adam losing money are not independent events because if the sum is 7 or 11, the sum cannot be 2 or 3 or 12. 
+# If two events are disjoint, they cannot happen at the same time. Adam winning money and Adam losing money are disjoint events because if Adam wins, Adam did not lose.
+
+# e)
+# A = Adam wins money. P(A) = 0.22.
+# B = Adam loses money. P(B) = 0.11.
+# Because the events are disjoint P(A and B) = 0.
+# For independent events, P(A) = P(A and B)/P(B) = P(A|B).
+# P(A and B)/P(B) = 0/0.11 = 0.
+# Because P(A) does not equal P(A and B)/P(B), we know that the events are not independent.
+```

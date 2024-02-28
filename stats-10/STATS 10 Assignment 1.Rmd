@@ -1,0 +1,118 @@
+---
+title: "STATS 10 Assignment 1"
+author: "Bethany Kim"
+date: "2023-04-23"
+output: html_document
+---
+Part I\
+Vectors\
+```{r}
+# 1.
+# a)
+heights <- c(63, 63, 63)
+heights # OR (heights <- c(63, 63, 63))
+
+# b)
+names <- c("Bethany", "Bethany", "Bethany")
+names # OR (names <- c("Bethany", "Bethany", "Bethany"))
+
+# c)
+object <- cbind(heights, names)
+# cbind combines R objects by rows or columns.
+class(object)
+# cbind is a matrix, which is a type of array.
+```
+
+Downloading data\
+```{r}
+# 2. 
+# a)
+NCbirths <- read.csv("births.csv")
+
+# b)
+head(NCbirths)
+```
+
+Package loading\
+```{r}
+# 3.
+# a)
+# install.packages("maps")
+find.package("maps")
+
+# b)
+library(maps)
+map("state")
+```
+
+Perform vector operations\
+```{r}
+# 4.
+# a)
+weights <- NCbirths$weight # OR NCbirths[, 3]
+
+# b)
+# I think the weights are in ounces.
+
+# c)
+weights_in_pounds <- weights/16
+
+# d)
+weights_in_pounds[1:20]
+```
+
+Summarizing data\
+```{r}
+# 5.
+mean(weights_in_pounds)
+
+# a)
+# install.packages("mosaic")
+library(mosaic)
+tally(NCbirths$Habit, format = "percent")
+
+# b)
+21 - tally(NCbirths$Habit, format = "percent")[2]
+```
+
+Visualizing data (One quantitative variable)\
+```{r}
+# 6.
+histogram(weights_in_pounds, n = 3)
+histogram(weights_in_pounds, n = 20)
+histogram(weights_in_pounds, n = 100)
+# The histogram with 20 bins seems to give the best visualization because it captures the variation in the data while avoiding excessive noice or oversmoothing.
+```
+
+```{r}
+# 7.
+boxplot(NCbirths$Mage, NCbirths$Fage)
+# The fathers tend to be older.
+```
+
+```{r}
+# 8.
+histogram(~ weight | Habit, data = NCbirths, layout = c(1, 2))
+# This code tells R to use the data in NCbirths. Because we told R which data to use, we did not need to use the $ sign in front of weight and Habit. The variable weight was used to plot the data and the categorical variable Habit was used to separate the data points into two histograms.
+# The distribution for the weights of babies with non-smoking moms is slightly to the right of the distribution for the weights of babies with smoking moms. This means that non-smoking moms tend to give birth to heavier babies than smoking moms.
+```
+
+```{r}
+# 9.
+dotPlot(weights_in_pounds, cex = 20)
+```
+
+```{r}
+# 10.
+# I think BirthDef will be associated with the mother's smoking because the damaging effects of smoking slow the baby's growth and development.
+library(mosaic)
+tally(~Habit | BirthDef, data = NCbirths, format = "proportion")
+# Birth defects may be associated with smoking because 90% of babies born with no birth defects have moms that don't smoke.
+```
+
+Visualizing Data (Two quantitative variables)\
+```{r}
+# 11.
+plot(NCbirths$weight ~ NCbirths$Gained, col = "blue", cex = 1.5, pch = 20, xlab = "Weight gained during pregnancy", ylab = "Baby weight (oz)", main = "Baby weight vs. Pregnancy weight gain")
+```
+
