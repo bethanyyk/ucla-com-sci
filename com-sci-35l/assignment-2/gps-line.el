@@ -1,0 +1,5 @@
+(defun gps-line ()
+  (interactive)
+  (let ((current (line-number-at-pos))
+        (total (count-matches "\n" (point-min) (point-max))))
+    (message "Line %d/%d" current total)))
