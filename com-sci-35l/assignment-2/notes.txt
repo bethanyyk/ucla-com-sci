@@ -1,0 +1,29 @@
+1. Command: (* (expt 2 (- 607 1)) (- (expt 2 607) 1))
+Result: 14105378370671206906320795808606318988148674351471566783883867599995486\
+77426523801141041933290376902515619505687098293271640877243663700871167\
+31268159313652487450652439805877296207297446723295166658228846926807786\
+65287018892086787945147836456931392206037069506473607357237869517647305\
+52668262532848863837150729743244638353000531384294602965751433680655707\
+59537328128
+
+2. Command: (+ 1 (logb (* (expt 2 (- 607 1)) (- (expt 2 607) 1))))
+Result: 1213
+
+3. C-h k runs the command describe-key, which displays the documentation of the function invoked by the input key. When you type C-h k C-h k, it will describe what the C-h k key binding does.
+
+4. When you type C-h k M-SPC, it will describe what the M-SPC key binding does. It tells you that M-SPC runs the command cycle-spacing, which manipulates the whitespace around point in a smart way.
+
+5. M-x just-one-space
+
+6. When randline.py is invoked on a non-empty file, it selects random lines from the file that was provided as input and the number of lines it selects is based on the -n argument provided by the user. It does this by reading each line in the file, storing it in a list, and using the random library to select lines.
+
+7. When randline.py is invoked on an empty file, it raises an IndexError with the message "Cannot choose from an empty sequence". Because there are no lines to read in the file, self.lines is just an empty list and random.choice() can't pick elements from an empty list.
+
+8. When you use Python 3 to run randline_old.py, you get a SyntaxError with the message "Invalid syntax". This results from the differences in exception handling between Python 2 and Python 3. IOError exceptions used tuple unpacking in Python 2(except IOError as (errno, strerror)), while Python 3 treats exceptions as objects (except IOError as error).
+
+9. Benchmark results
+    a. shuf: 0.065s
+       /usr/local/cs/bin/python3: 0.797s
+       /usr/bin/python: 0.869s
+    b. CPU: Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz
+       OS: Red Hat Enterprise Linux 9.4 (Plow)
