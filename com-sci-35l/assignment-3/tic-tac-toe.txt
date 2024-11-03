@@ -1,0 +1,39 @@
+1. Use Square components and some divs to create a 3-by-3 Board component.
+2. Add a value prop to the Square component so that the Board can pass the value to the Square.
+3. Make the Square component interactive by using handleClick. The onClick prop is set to send a message to the console.
+4. Replace the Square component's value prop with a useState function call so that it can "remember" that it was clicked.
+	a. Have the Square component return a state variable for value. Use null as the initial value. The function setValue will be used to change the value.
+	b. Replace the event handler that sends a message to the console to a call to setValue. By doing this, React will re-render the Square whenever it is clicked.
+5. Store the game's state in the Board component instead of in each Square. The Board component will tell each Square what to display by passing a prop.
+	a. Edit the Board component so that it declares a state variable named squares that defaults to an array of 9 nulls corresponding to the 9 squares.
+	b. Have the Board ocmponent pass the value prop down to each Square that it renders.
+	c. Remove the Square component's own stateful tracking of value and onClick.
+6. Create a way for the Square to update the Board's state. Since state is private to a component that defines it, you can't update the Board's state directly from Square.
+	a. Add an onSquareClick function to the Square component's props.
+	b. Connect the onSquareClick prop to a handleClick function in the Board component by passing a function to the onSquareClick prop of the Square component.
+		i. Add an argument i to the handleClick function that takes the index of the Square to update.
+		ii. Pass i to handleClick. Use an arrow function so that the function isn't called too early.
+	c. Define the handleClick function inside the Board component to update the squares array. Use the slice() Array method so that a "time travel" feature can be implemented and so that components that weren't changed aren't re-rendered.
+7. Set the first move to be "X" by default. Keep track of the turns using a boolean xIsNext variable.
+	a. Update the Board's handleClick function to flip the value of xIsNext.
+	b. Check if the square is already filled. If it is, return early in the handleClick function (i.e. before it tries to update the board state).
+8. Add a helper function called calculateWinner that checks for a winner. The check can be performed at the same time that you check if a square is already filled because you would want to return early in both cases.
+9. Store the past squares arrays created by slice() in another array called history, which will be stored as a new state variable.
+	a. Write a new top-level component called Game that displays a list of past moves.
+	b. Lift state up from the Board into the Game, which will give the Game component full control over the Board's data and let is nistruct the Board to render previous turns from the history.
+		i. Add a Game component with export default and have it render the Board component and some markup.
+		ii. Add some state to the Game component to track which player is next and the history of moves. To render the squares for the current move, you can read the last squares array from history.
+		iii. Create a handlePlay function inside the Game component that will be called by the Board component to update the game. Pass xIsNext, currentSquares, and handlePlay as props to the Board component.
+		iv. Change the Board component to take xIsNext, squares, and a new onPlay function as props. onPlay is a function that Board can call with the updated squares array when a player makes a move. Remove the lines in the Board function that call useState.
+		v. Replace the setSquares and setXIsNext calls in handleClick in the Board component with a single call to onPlay.
+	c. Implement the handlePlay function.
+		i. Update history by appending the updated squares array as a new entry. Toggle xIsNext like Board used to do.
+10. Use map to transform your history of moves into buttons that can "jump" to past moves.
+	a. Create a list item for each item in history that contains a button. The button will have an onClick handler that calls a function called jumpTo that will be implemented later.
+	b. Specify a key property for each list item to diffrentiate it from its siblings. Use the move index as a key.
+	d. Have the Game component keep track of which step the user is currently viewing using a new state variable called currentMove.
+	e. Update the jumpTo function inside Game to update the currentMove. Set xIsNext to true if the number you're changing currentMove to is even.
+	f. Update handlePlay.
+		i. If you "go back in time" and make a new move from that point, add nextSquares after all items in history.slice(0, currentMove + 1) so that you're only keeping that portion of the old history.
+		ii. Each time a move is made, update currentMove to point to the latest history entry.
+11. Modify the Game component to render the currently selected move instead of always rendering the final move.

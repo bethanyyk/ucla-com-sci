@@ -1,0 +1,29 @@
+Building off of the React Tic-Tac-Toe Tutorial (Before "Adding time travel")
+1. Track the number of pieces each player has placed.
+2. If three pieces have already been placed, the player will have to select an existing piece and move it to an adjacent empty square.
+	a. Keep track of the selected piece to move using a state variable called movingSquare. It is set to null initially. When a player has to move a existing piece, it updates to the index of the selected piece.
+	b. Create a helper function called calculateMovable to check if a selected piece can be moved to another square.
+		i. Check if the move is to an adjacent empty square.
+		ii. If the player has a piece in the center, they must vacate the center or make a winning move.
+	c. Update handleClick to handle moves after each player places three pieces on the board using the helper function.
+
+npm pack --dry-run
+npm notice
+npm notice 📦  react.dev@0.0.0
+npm notice Tarball Contents
+npm notice 610B package.json
+npm notice 228B public/index.html
+npm notice 4.1kB src/App.js
+npm notice 267B src/index.js
+npm notice 1.2kB src/styles.css
+npm notice Tarball Details
+npm notice name: react.dev
+npm notice version: 0.0.0
+npm notice filename: react.dev-0.0.0.tgz
+npm notice package size: 2.1 kB
+npm notice unpacked size: 6.4 kB
+npm notice shasum: d3273e60b2b00748c8f76570ab677460cba47ece
+npm notice integrity: sha512-utqgDw/geO7ZR[...]Ww6d66TZLZOUg==
+npm notice total files: 5
+npm notice
+react.dev-0.0.0.tgz
