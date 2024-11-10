@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep '^CommitDate:' | awk '{print $NF}' | sort -g | uniq -c | awk '{print $2" "$1}'

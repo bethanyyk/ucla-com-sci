@@ -1,0 +1,1 @@
+~eggert/src/github/git has more local branches (main, master, next, seen, todo). My repository only has the master branch.

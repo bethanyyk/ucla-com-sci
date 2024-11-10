@@ -1,0 +1,237 @@
+*   commit c03bee6e9f5c05259f5f501e1f47cd8adb63af38
+|\  Merge: bcd6bc478a dedb2883ce
+| | Author: Junio C Hamano <gitster@pobox.com>
+| | Date:   Sun Oct 2 08:24:32 2022 -0700
+| | 
+| |     Merge tag 'l10n-2.38.0-rnd3' of https://github.com/git-l10n/git-po
+| |     
+| |     l10n-2.38.0-rnd3
+| |     
+| |     * tag 'l10n-2.38.0-rnd3' of https://github.com/git-l10n/git-po: (25 commits)
+| |       l10n: zh_TW.po: Git 2.38.0, round 3
+| |       l10n: fr: v2.38.0 round 3
+| |       l10n: Update Catalan translation
+| |       l10n: de.po: update German translation
+| |       l10n: zh_CN: 2.38.0 round 3
+| |       l10n: tr: v2.38.0 3rd round
+| |       l10n: bg.po: Updated Bulgarian translation (5484t)
+| |       l10n: po-id for 2.38 (round 3)
+| |       l10n: es: update translation
+| |       l10n: sv.po: Update Swedish translation (5484t0f0u)
+| |       l10n: Update Catalan translation
+| |       l10n: fr: don't say that merge is "the default strategy"
+| |       l10n: zh_CN v2.38.0 rounds 1 & 2
+| |       l10n: po-id for 2.38 (round 2)
+| |       l10n: tr: v2.38.0 round 2
+| |       l10n: bg.po: Updated Bulgarian translation (5484t)
+| |       l10n: fr: v2.38.0 round 2
+| |       l10n: fr: v2.38 round 1
+| |       l10n: fr: The word 'branche' is only feminine
+| |       l10n: Update Catalan translation
+| |       ...
+| | 
+| * commit dedb2883ce5670401ccd2a18e47d6dae2bc798ab
+| | Author: Yi-Jyun Pan <pan93412@gmail.com>
+| | Date:   Sat Oct 1 19:04:42 2022 +0800
+| | 
+| |     l10n: zh_TW.po: Git 2.38.0, round 3
+| |     
+| |     Signed-off-by: Yi-Jyun Pan <pan93412@gmail.com>
+| |   
+| *   commit d7f69b76ec1d3936e6c32af62f11afa15cfa824f
+| |\  Merge: 21cefac967 55b1c1ab1c
+| | | Author: Jiang Xin <worldhello.net@gmail.com>
+| | | Date:   Sat Oct 1 10:02:03 2022 +0800
+| | | 
+| | |     Merge branch 'po-id' of github.com:bagasme/git-po
+| | |     
+| | |     * 'po-id' of github.com:bagasme/git-po:
+| | |       l10n: po-id for 2.38 (round 3)
+| | | 
+| | * commit 55b1c1ab1c01e45c77012b25ef1ab8c2160fa8b8
+| | | Author: Bagas Sanjaya <bagasdotme@gmail.com>
+| | | Date:   Sun Sep 25 14:53:53 2022 +0700
+| | | 
+| | |     l10n: po-id for 2.38 (round 3)
+| | |     
+| | |     Update following components:
+| | |     
+| | |       * sequencer.c
+| | |       * wt-status.c
+| | |     
+| | |     Translate following new components:
+| | |     
+| | |       * compat/compiler.h
+| | |       * compat/disk.h
+| | |       * compat/fsmonitor/fsm-health-win32.c
+| | |       * compat/fsmonitor/fsm-listen-darwin.c
+| | |       * compat/fsmonitor/fsm-listen-win32.c
+| | |       * compat/fsmonitor/fsm-settings-win32.c
+| | |       * compat/mingw.c
+| | |       * compat/obstack.c
+| | |       * compat/regex/regcomp.c
+| | |       * compat/simple-ipc/ipc-unix-socket.c
+| | |       * compat/simple-ipc/ipc-win32.c
+| | |       * compat/terminal.c
+| | |       * convert.c
+| | |       * entry.c
+| | |       * environment.c
+| | |       * exec-cmd.c
+| | |       * git-merge-octopus.sh
+| | |       * git-sh-setup.sh
+| | |       * list-objects-filter-options.c
+| | |       * list-objects-filter-options.h
+| | |       * list-objects.c
+| | |       * lockfile.c
+| | |       * ls-refs.c
+| | |       * mailinfo.c
+| | |       * name-hash.c
+| | |       * notes-merge.c
+| | |       * notes-utils.c
+| | |       * pkt-line.c
+| | |       * preload-index.c
+| | |       * pretty.c
+| | |       * promisor-remote.c
+| | |       * protocol-caps.c
+| | |       * read-cache.c
+| | |       * scalar.c
+| | |       * transport-helper.c
+| | |       * transport.c
+| | |       * tree-walk.c
+| | |       * urlmatch.c
+| | |       * walker.c
+| | |       * wrapper.c
+| | |     
+| | |     Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+| | |   
+| * |   commit 21cefac9678698f6188acbd472045fecc27e5c15
+| |\ \  Merge: 48bf511320 92e51feec5
+| | | | Author: Jiang Xin <worldhello.net@gmail.com>
+| | | | Date:   Thu Sep 29 18:54:12 2022 +0800
+| | | | 
+| | | |     Merge branch 'l10n-de-2.38-rnd3' of github.com:ralfth/git
+| | | |     
+| | | |     * 'l10n-de-2.38-rnd3' of github.com:ralfth/git:
+| | | |       l10n: de.po: update German translation
+| | | |   
+| * | |   commit 48bf511320713d6c09982845a8f7459f2f73d52e
+| |\ \ \  Merge: 08f41b8171 48fe8e6a63
+| | | | | Author: Jiang Xin <worldhello.net@gmail.com>
+| | | | | Date:   Thu Sep 29 08:00:30 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'fr_2.38_rnd3' of github.com:jnavila/git
+| | | | |     
+| | | | |     * 'fr_2.38_rnd3' of github.com:jnavila/git:
+| | | | |       l10n: fr: v2.38.0 round 3
+| | | | | 
+| | * | | commit 48fe8e6a63a87f881ae2868792cad2e3dc81e24f
+| | | | | Author: Jean-Noël Avila <jn.avila@free.fr>
+| | | | | Date:   Wed Sep 28 21:46:22 2022 +0200
+| | | | | 
+| | | | |     l10n: fr: v2.38.0 round 3
+| | | | |     
+| | | | |     Signed-off-by: Jean-Noël Avila <jn.avila@free.fr>
+| | | | |   
+| * | | |   commit 08f41b8171975402657bfd9abdf2086de3edcd98
+| |\ \ \ \  Merge: b796ca1cd4 42fe2b951a
+| | | | | | Author: Jiang Xin <worldhello.net@gmail.com>
+| | | | | | Date:   Thu Sep 29 07:59:44 2022 +0800
+| | | | | | 
+| | | | | |     Merge branch 'catalan' of github.com:Softcatala/git-po
+| | | | | |     
+| | | | | |     * 'catalan' of github.com:Softcatala/git-po:
+| | | | | |       l10n: Update Catalan translation
+| | | | | | 
+| | * | | | commit 42fe2b951a9ae56bf750a11c0f2a290a3782236f
+| | |/ / /  Author: Jordi Mas <jmas@softcatala.org>
+| | | | |   Date:   Wed Sep 28 19:05:55 2022 +0200
+| | | | |   
+| | | | |       l10n: Update Catalan translation
+| | | | |       
+| | | | |       Signed-off-by: Jordi Mas <jmas@softcatala.org>
+| | | | | 
+| * | | | commit b796ca1cd4c996b55b3c68afd34705a30f06219b
+| |/ / /  Author: Fangyi Zhou <me@fangyi.io>
+| | | |   Date:   Wed Sep 28 15:50:49 2022 +0100
+| | | |   
+| | | |       l10n: zh_CN: 2.38.0 round 3
+| | | |       
+| | | |       Signed-off-by: Fangyi Zhou <me@fangyi.io>
+| | | |   
+| * | |   commit 37db9416c4a097eb3d7967383b2e5d48b8705f3d
+| |\ \ \  Merge: 8d500614f7 2c30dfa7d7
+| | | | | Author: Jiang Xin <worldhello.net@gmail.com>
+| | | | | Date:   Wed Sep 28 20:54:29 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'turkish' of github.com:bitigchi/git-po
+| | | | |     
+| | | | |     * 'turkish' of github.com:bitigchi/git-po:
+| | | | |       l10n: tr: v2.38.0 3rd round
+| | | | | 
+| | * | | commit 2c30dfa7d7c18608da41e9ff22890c13aedb49a4
+| | | |/  Author: Emir SARI <emir_sari@icloud.com>
+| | |/|   Date:   Wed Sep 28 12:32:13 2022 +0300
+| | | |   
+| | | |       l10n: tr: v2.38.0 3rd round
+| | | |       
+| | | |       Signed-off-by: Emir SARI <emir_sari@icloud.com>
+| | | |   
+| * | |   commit 8d500614f7a9763c4e4193e8231ab600594ac5ca
+| |\ \ \  Merge: 9af6cb88b6 88fda53a16
+| | | | | Author: Jiang Xin <worldhello.net@gmail.com>
+| | | | | Date:   Wed Sep 28 20:52:34 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'master' of github.com:alshopov/git-po
+| | | | |     
+| | | | |     * 'master' of github.com:alshopov/git-po:
+| | | | |       l10n: bg.po: Updated Bulgarian translation (5484t)
+| | | | | 
+| | * | | commit 88fda53a1637af088d1d54e026aa7762b8f6697b
+| | |/ /  Author: Alexander Shopov <ash@kambanaria.org>
+| | | |   Date:   Wed Sep 28 11:00:59 2022 +0200
+| | | |   
+| | | |       l10n: bg.po: Updated Bulgarian translation (5484t)
+| | | |       
+| | | |       Signed-off-by: Alexander Shopov <ash@kambanaria.org>
+| | | | 
+| * | | commit 9af6cb88b674b140d177fede6d61811ac55f73fb
+| |/ /  Author: Alex Henrie <alexhenrie24@gmail.com>
+| | |   Date:   Tue Sep 27 22:56:55 2022 -0600
+| | |   
+| | |       l10n: es: update translation
+| | |       
+| | |       Signed-off-by: Alex Henrie <alexhenrie24@gmail.com>
+| | |   
+| * |   commit 4ff58e9690fd7f06c0ae1a32480effb21ef8139e
+| |\ \  Merge: 33ccfd1e5b bcd6bc478a
+| |/ /  Author: Jiang Xin <worldhello.net@gmail.com>
+|/| |   Date:   Wed Sep 28 08:03:38 2022 +0800
+| | |   
+| | |       Merge branch 'main' of github.com:git/git
+| | |       
+| | |       * 'main' of github.com:git/git:
+| | |         Git 2.38-rc2
+| | |         pack-bitmap: remove trace2 region from hot path
+| | | 
+* | | commit bcd6bc478adc4951d57ec597c44b12ee74bc88fb (tag: v2.38.0-rc2)
+| | | Author: Junio C Hamano <gitster@pobox.com>
+| | | Date:   Tue Sep 27 11:25:52 2022 -0700
+| | | 
+| | |     Git 2.38-rc2
+| | |     
+| | |     We have small updates since -rc1 but none of them is about a new
+| | |     thing and there is no updates to the release notes.
+| | |     
+| | |     Signed-off-by: Junio C Hamano <gitster@pobox.com>
+| | | 
+o | | commit 2a7d63a2453e2c30353342a2c9385fa22a846987
+ / /  Merge: 4fd6c5e444 89a1ab8fb5
+| |   Author: Junio C Hamano <gitster@pobox.com>
+| |   Date:   Mon Sep 26 21:46:51 2022 -0700
+| |   
+| |       Merge branch 'ds/bitmap-lookup-remove-tracing'
+| |       
+| |       Perf-fix.
+| |       
+| |       * ds/bitmap-lookup-remove-tracing:
+| |         pack-bitmap: remove trace2 region from hot path

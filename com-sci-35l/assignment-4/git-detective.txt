@@ -1,0 +1,125 @@
+Start by conducting a broad search to find commits with specific keywords.
+
+Command:
+git log v2.38.0..v2.39.0 --grep="merge-tree\|segfault"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Narrow down the search using an even more specific phrase found during my initial search.
+
+Command:
+git log --grep='merge result tree object'
+
+Output:
+commit bcf22f29df87f25582de0ac9274d1567fa16be6f
+Merge: 7f8a6caee5 92481d1b26
+Author: Junio C Hamano <gitster@pobox.com>
+Date:   Tue Oct 25 17:11:34 2022 -0700
+
+    Merge branch 'js/merge-ort-in-read-only-repo' into maint-2.38
+
+    In read-only repositories, "git merge-tree" tried to come up with a
+    merge result tree object, which it failed (which is not wrong) and
+    led to a segfault (which is bad), which has been corrected.
+
+    * js/merge-ort-in-read-only-repo:
+      merge-ort: return early when failing to write a blob
+      merge-ort: fix segmentation fault in read-only repositories
+
+commit 19118cb8570e499e1a56e81740cee3d1c1206b44
+Merge: a215853545 92481d1b26
+Author: Junio C Hamano <gitster@pobox.com>
+Date:   Mon Oct 10 10:08:43 2022 -0700
+
+    Merge branch 'js/merge-ort-in-read-only-repo'
+
+    In read-only repositories, "git merge-tree" tried to come up with a
+    merge result tree object, which it failed (which is not wrong) and
+    led to a segfault (which is bad), which has been corrected.
+
+    * js/merge-ort-in-read-only-repo:
+      merge-ort: return early when failing to write a blob
+      merge-ort: fix segmentation fault in read-only repositories
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Get more information about the state of the branch before the first merge occurred.
+
+Command:
+git show a215853545
+
+Output:
+commit a215853545209b2e82a49c3fc538b9aad204d274
+Merge: 38bb92cf46 b62ad5681f
+Author: Junio C Hamano <gitster@pobox.com>
+Date:   Mon Oct 10 10:08:43 2022 -0700
+
+    Merge branch 'tb/midx-repack-ignore-cruft-packs'
+
+    "git multi-pack-index repack/expire" used to repack unreachable
+    cruft into a new pack, which have been corrected.
+
+    * tb/midx-repack-ignore-cruft-packs:
+      midx.c: avoid cruft packs with non-zero `repack --batch-size`
+      midx.c: remove unnecessary loop condition
+      midx.c: replace `xcalloc()` with `CALLOC_ARRAY()`
+      midx.c: avoid cruft packs with `repack --batch-size=0`
+      midx.c: prevent `expire` from removing the cruft pack
+      Documentation/git-multi-pack-index.txt: clarify expire behavior
+      Documentation/git-multi-pack-index.txt: fix typozqa
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Get more information about the changes that were being merged.
+
+Command: 
+git show 92481d1b26
+
+Output:
+commit 92481d1b26ab57525f5efe01d01c7a3d337b8df7
+Author: Johannes Schindelin <Johannes.Schindelin@gmx.de>
+Date:   Wed Sep 28 07:29:22 2022 +0000
+
+    merge-ort: return early when failing to write a blob
+
+    In the previous commit, we fixed a segmentation fault when a tree object
+    could not be written.
+
+    However, before the tree object is written, `merge-ort` wants to write
+    out a blob object (except in cases where the merge results in a blob
+    that already exists in the database). And this can fail, too, but we
+    ignore that write failure so far.
+
+    ...
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Check whether the previous commit is also related.
+
+Command:
+git show 92481d1b26^
+
+Output:
+commit 0b55d930a69692c7f4e7b90e35fa41f6c46df4bc
+Author: Johannes Schindelin <Johannes.Schindelin@gmx.de>
+Date:   Wed Sep 28 07:29:21 2022 +0000
+
+    merge-ort: fix segmentation fault in read-only repositories
+
+    If the blob/tree objects cannot be written, we really need the merge
+    operations to fail, and not to continue (and then try to access the tree
+    object which is however still set to `NULL`).
+
+    ...
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Verify that the two commits we examined were the only ones near the patch we were searching for.
+
+Command: git log --graph --oneline --decorate bcf22f29df87f25582de0ac9274d1567fa16be6f
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+RESULTS OF THE INVESTIGATION
+
+Commit 0b55d930a69692c7f4e7b90e35fa41f6c46df4bc, which was authored by Johannes Schindelin, led to the correction of the segmentation fault error.
