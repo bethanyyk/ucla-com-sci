@@ -70,7 +70,7 @@ def topo_order_commits():
         for file in os.listdir(branches_path):
             file_path = os.path.join(branches_path, file)
 
-            # If it's another subdirecory, add to queue for further traversal
+            # If it's another subdirectory, add to queue for further traversal
             if os.path.isdir(file_path):
                 queue.append(file + "/")
                 continue
