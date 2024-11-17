@@ -52,7 +52,6 @@ def topo_order_commits():
         curr_directory = os.path.dirname(curr_directory)
 
     repo_path = curr_directory
-    root_commits = []
     hash_to_branch = {}
     graph = {}
 
@@ -82,7 +81,6 @@ def topo_order_commits():
             root_commit_hashes.append(commit_hash)
             node = CommitNode(commit_hash)
             graph[commit_hash] = node
-            root_commits.append(node)
 
             # If the commit hash is already associated with other branches, append the current branch to the list
             branch_name = os.path.join(popped, file)
